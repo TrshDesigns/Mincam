@@ -1,0 +1,17 @@
+{
+    "name": "Mincam",
+    "short_name": "Mincam",
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "background_color": "#fff",
+    "theme_color": "#2233ff",
+    "description": "Mincam is a web application and app that allows you to take photos",
+    "icons": [
+        {
+            "src": "images/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

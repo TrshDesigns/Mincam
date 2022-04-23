@@ -1,0 +1,19 @@
+#gallery-bar {
+    width: 30%;
+    overflow-y: scroll;
+    /*add a soft border*/
+    border-right: 1px solid #ccc;
+    height: 90vh;
+    background-color: #8da9c4;
+    //change the scrollbar
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #8da9c4;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #134074;
+    }
+}
