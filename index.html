@@ -18,85 +18,33 @@
     <!--add a manifest.json-->
     <link rel="manifest" href="manifest.json" />
     <title>Mincam</title>
+    <script src="/main.js"></script>
   </head>
   <body>
-    <header>
-      <div class="container">
-        <div class="logo">
-          <a href="index.html"><img src="img/logo.png" alt="logo" /></a>
-        </div>
-        <div class="menu">
-          <ul>
-            <li><a href="about.html">About</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
-    <main>
+      <main>
       <div id="app">
         <!--create a camera-->
         <div class="camera">
           <video id="video" autoplay></video>
         <canvas id="canvas"></canvas>
-        </div>
         <div id="controls">
-            <button><i class="fas fa-play"></i>Play</button>
-            <button><i class="fas fa-pause"></i>Pause</button>
-            <!--add a delete button-->
-            <button><i class="fas fa-trash-alt"></i>Delete</button>
-            <!--add a snap bottom-->
-            <button><i class="fas fa-camera" onclick="snapshot()"></i>Snap</button>
-            <!--add a save button-->
-            <button><i class="fas fa-save"></i>Save</button>
-          </div>
+          <button onclick="startVideo()"><i class="fas fa-play"></i>Play</button>
+          <button onclick="pauseVideo()"><i class="fas fa-pause"></i>Pause</button>
+          <!--add a delete button-->
+          <button onclick="deleteSnapshot()"><i class="fas fa-trash-alt"></i>Delete</button>
+          <!--add a snap bottom-->
+          <button onclick="snapshot()"><i class="fas fa-camera"></i>Snap</button>
+          <!--add a save button-->
+          <button onclick="saveSnapshot()"><i class="fas fa-save"></i>Save</button>
+        </div>
+        </div>
           <script>
              //get the user camera data stream and assing it to the video
-              navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-                .then(function(stream) {
-                  video.srcObject = stream;
-                  video.play();
-                })
-                .catch(function(err) {
-                  console.log("An error occurred: " + err);
-                });
-                //create a function called snapshot that takes the video and output it to the canvas as a snapshot
-                function snapshot() {
-                  var context = canvas.getContext("2d");
-                  //set the canvas width and height to the video width and height
-                  canvas.width = video.videoWidth;
-                  canvas.height = video.videoHeight;
-                  //draw the video to the canvas
-                  context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                  //get the canvas data as a data url
-                  var dataURL = canvas.toDataURL("image/png");
-                  //create a link to the data url
-                  var link = document.createElement("a");
-                  //set the link href to the data url
-                  link.href = dataURL;
-                  //set the link download attribute to the current date and time
-                  link.download = new Date().toISOString();
-                  //add the link to the document
-                  document.body.appendChild(link);
-                  //click the link to trigger the download
-                  link.click();
-                  //remove the link from the document
-                  document.body.removeChild(link);
-                }
+             
           </script>
       </div>
       <div id="gallery-bar">
-        <div class="photo"></div>
-        <div class="photo"></div>
-        <div class="photo"></div>
-        <div class="photo"></div>
-        <div class="photo"></div>
-        <div class="photo"></div>
-        <div class="photo"></div>
-        <div class="photo"></div>
-        <div class="photo"></div>
-        <div class="photo"></div>
-        <div class="photo"></div>
-        <div class="photo"></div>
+        <div id="gallery-container"></div>
       </div>
     </main>
   </body>

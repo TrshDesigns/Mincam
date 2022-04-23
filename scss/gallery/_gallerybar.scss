@@ -4,16 +4,28 @@
     /*add a soft border*/
     border-right: 1px solid #ccc;
     height: 90vh;
-    background-color: #8da9c4;
+    background-color: var(--main-color);
+    padding:10px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+    border-radius:10px;
     //change the scrollbar
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
         width: 10px;
         height: 10px;
+        border-radius:10px;
     }
-    ::-webkit-scrollbar-track {
+    &::-webkit-scrollbar-track {
         background: #8da9c4;
+        border-radius:10px;
     }
-    ::-webkit-scrollbar-thumb {
+    &::-webkit-scrollbar-thumb {
         background: #134074;
+        border-radius:10px;
+    }
+    #gallery-container{
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items:center;
     }
 }

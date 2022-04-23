@@ -2,13 +2,13 @@
     width: 100%;
     height:640px;
     /*add a soft shadow*/
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0,0,0,0.10);
 }
 #video{
     min-height:300px;
     min-width: 320px;
-    height:300px;
-    width:300px;
-    border:#000 1px solid;
-    border-radius:5px;
+    width:50%;
+    //add a soft neuromprhic shadow
+    box-shadow: 0 0 10px rgba(0,0,0,0.10);
+    border-radius:10px;
 }
