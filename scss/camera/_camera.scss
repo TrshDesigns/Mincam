@@ -5,4 +5,7 @@
     align-items:center;
     height:100vh;
     width:min-content;
+    @media (max-width:800px){
+        justify-content: flex-start;
+    }
 }
