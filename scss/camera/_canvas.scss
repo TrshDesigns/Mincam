@@ -1,7 +1,15 @@
-#canvas{
+#canvas {
     width: 220px;
-    height:180px;
-    margin:20px 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.15);
-    border-radius:10px;
+    height: 180px;
+    margin: 20px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    @media (max-width: 800px) {
+        position: absolute;
+        bottom: 64px;
+        right: 76vw;
+        height:60px;
+        width:62px;
+        border: 3.5px solid white;
+    }
 }
