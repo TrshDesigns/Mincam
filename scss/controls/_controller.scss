@@ -3,7 +3,7 @@
         background-color:rgb(255, 255, 255);
         color: #0f0f0f;
         border-radius: 5px;
-        padding:15.6px;
+        padding:6px;
         margin-inline:5px;
         border:none;
         display:flex;
@@ -23,13 +23,15 @@
             transform: scale(1.1);
         }
         .fas{
-            font-size:22px;
+            font-size:19px;
             padding:5px;
         }
     }
 
     width: 60%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     justify-content: space-around;
     height: 40px;
     outline:none;
