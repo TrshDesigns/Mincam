@@ -30,6 +30,7 @@ function snapshot() {
         //if flash active is false then deactivate the flash
     } else if (flashActive == false) {
         context.drawImage(video, 0, 0, videoWidth, videoHeight);
+        flashAcive = true;
     }
     //add a animate.css animation to the canvas 
     canvas.classList.add("animated", "fadeIn");
@@ -66,6 +67,7 @@ function resizeCanvas() {
 var flashActive = true;
 function frontFlash() {
     let flashIcon = document.getElementsByClassName("fas fa-bolt");
+
     if (flashActive = false) {
         flashActive = true;
         flashIcon.style.display = "block";
@@ -112,18 +114,42 @@ function saveSnapshot() {
     document.body.removeChild(link);
 }
 
-function deleteSnapshot() {
-    //clear the canvas image
-    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+function setFrontCamera() {
+    //create a function to change the user camera between front and back camera
+    //if the user has a front and back camera
+    if (navigator.mediaDevices.enumerateDevices().then(function (devices) {
+        devices.forEach(function (device) {
+            if (device.kind === 'videoinput') {
+                //if the device is a front camera
+                if (device.label.includes('front')) {
+                    //set the video source to the front camera
+                    video.srcObject = navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+                    //play the video
+                    video.play();
+                } else {
+                    //set the video source to the back camera
+                    video.srcObject = navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                    //play the video
+                    video.play();
+                }
+            }
+        }
+        );
+    }));
 }
+
+function deleteSnapshot() {
+                //clear the canvas image
+                canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+            }
 
 
 //create a function that pause the video
 function pauseVideo() {
-    video.pause();
-}
+                video.pause();
+            }
 
 function startVideo() {
-    //create a function to start the video
-    video.play()
-}
+                //create a function to start the video
+                video.play()
+            }

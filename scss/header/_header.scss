@@ -17,6 +17,11 @@ header {
       cursor: pointer;
     }
   }
+  .activate-flash{
+    &::before{
+      content: "*";
+    }
+  }
 }
 #app {
   height: min-content;
