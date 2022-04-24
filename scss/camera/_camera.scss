@@ -7,5 +7,6 @@
     width:min-content;
     @media (max-width:800px){
         justify-content: flex-start;
+        flex-direction: column-reverse;
     }
 }
