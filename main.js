@@ -114,8 +114,8 @@ function saveSnapshot() {
     document.body.removeChild(link);
 }
 
-function setFrontCamera() {
-    //create a function to change the user camera between front and back camera
+function setCamera() {
+    //create a function to change the user camera between front and back camera on mobile devices
     //if the user has a front and back camera
     if (navigator.mediaDevices.enumerateDevices().then(function (devices) {
         devices.forEach(function (device) {
@@ -124,32 +124,31 @@ function setFrontCamera() {
                 if (device.label.includes('front')) {
                     //set the video source to the front camera
                     video.srcObject = navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
-                    //play the video
-                    video.play();
-                } else {
+                }
+                //if the device is a back camera
+                else if (device.label.includes('back')) {
                     //set the video source to the back camera
                     video.srcObject = navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-                    //play the video
-                    video.play();
                 }
             }
-        }
-        );
-    }));
+        });
+    }
+    ));
 }
 
+
 function deleteSnapshot() {
-                //clear the canvas image
-                canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-            }
+    //clear the canvas image
+    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+}
 
 
 //create a function that pause the video
 function pauseVideo() {
-                video.pause();
-            }
+    video.pause();
+}
 
 function startVideo() {
-                //create a function to start the video
-                video.play()
-            }
+    //create a function to start the video
+    video.play()
+}
