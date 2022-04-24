@@ -26,7 +26,9 @@ function snapshot() {
     //if flash active is true then activate the flash
     if (flashActive == true) {
         activateFrontFlash();
+        setTimeout(function () {
         context.drawImage(video, 0, 0, videoWidth, videoHeight);
+        }, 800);
         //if flash active is false then deactivate the flash
     } else if (flashActive == false) {
         context.drawImage(video, 0, 0, videoWidth, videoHeight);
