@@ -9,7 +9,7 @@
     "description": "Mincam is a web application and app that allows you to take photos",
     "icons": [
         {
-            "src": "images/icon-512x512.png",
+            "src": "/resources/images/logo.png",
             "sizes": "512x512",
             "type": "image/png"
         }
