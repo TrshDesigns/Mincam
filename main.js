@@ -23,7 +23,14 @@ function snapshot() {
     //draw the video to the canvas
     canvas.style.objectFit = 'contain';
     //draw the video to the canvas
-    context.drawImage(video, 0, 0, videoWidth, videoHeight);
+    //if flash active is true then activate the flash
+    if (flashActive == true) {
+        activateFrontFlash();
+        context.drawImage(video, 0, 0, videoWidth, videoHeight);
+        //if flash active is false then deactivate the flash
+    } else if (flashActive == false) {
+        context.drawImage(video, 0, 0, videoWidth, videoHeight);
+    }
     //add a animate.css animation to the canvas 
     canvas.classList.add("animated", "fadeIn");
     //wait for the animation to finish and then remove the class
@@ -39,7 +46,6 @@ function snapshot() {
     imageContainer.appendChild(currentCanvas);
     galleryBarContainer.appendChild(imageContainer);
 }
-
 function resizeCanvas() {
     //this function activates when canvas button is clicked
     //add a class of active to the canvas when clicked
@@ -50,7 +56,6 @@ function resizeCanvas() {
         //add a class of active to the canvas
         canvas.classList.add("active");
         canvas.style.objectFit = 'contain';
-        context.drawImage(video, 0, 0, videoWidth, videoHeight);
     }
     else {
         //remove the class of active from the canvas
@@ -58,18 +63,37 @@ function resizeCanvas() {
     }
 }
 
+var flashActive = true;
 function frontFlash() {
+    let flashIcon = document.getElementsByClassName("fas fa-bolt");
+    if (flashActive = false) {
+        flashActive = true;
+        flashIcon.style.display = "block";
+        flashIcon.style.border = "1px solid orange"
+        flashIcon.appendChild(activeIndicator);
+    } else {
+        flashActive = false;
+    }
+}
+function activateFrontFlash() {
     let flash = document.getElementById('front-flashlight')
     flash.classList.toggle("flash-active");
+    flash.classList.add("animated", "fadeIn");
     //if the canvas has the class active
     if (flash.classList.contains("flash-active")) {
         //add a class of active to the canvas
         flash.classList.add("flash-active");
-        setTimeout(function () {
-            flash.classList.remove("flash-active");
-        }, 2000);
-    }
 
+        setTimeout(function () {
+            setTimeout(function () {
+                flash.classList.remove("animated", "fadeIn");
+                flash.classList.remove("flash-active");
+            }, 400);
+            flash.classList.add("animated", "fadeOut");
+
+        }, 800);
+        flash.classList.remove("animated", "fadeOut");
+    }
 }
 function saveSnapshot() {
     //get the canvas data as a data url
