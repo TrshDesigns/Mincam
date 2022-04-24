@@ -1,5 +1,20 @@
 header{
-    display:none;
+  display:flex;
+  flex-direction:row;
+  position:absolute;
+  width:100vw;
+  height:40px;
+  z-index:3;
+  background-color:#030303;
+  justify-content: space-evenly;
+  align-content:center;
+  button{
+      background:none;
+      border:none;
+  }
+  .fas {
+    color:white;
+  }
 }
 #app{
     height: min-content;

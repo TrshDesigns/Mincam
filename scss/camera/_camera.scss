@@ -10,3 +10,14 @@
         flex-direction: column-reverse;
     }
 }
+#front-flashlight{
+    display:none;
+}
+.flash-active{
+    display: block!important;
+    position:absolute;
+    height:100vh;
+    width:100vw;
+    background-color:white;
+    z-index:3;
+}

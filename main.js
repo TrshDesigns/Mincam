@@ -40,7 +40,7 @@ function snapshot() {
     galleryBarContainer.appendChild(imageContainer);
 }
 
-function resizeCanvas(){
+function resizeCanvas() {
     //this function activates when canvas button is clicked
     //add a class of active to the canvas when clicked
     //and remove it when clicked again
@@ -56,6 +56,20 @@ function resizeCanvas(){
         //remove the class of active from the canvas
         canvas.classList.remove("active");
     }
+}
+
+function frontFlash() {
+    let flash = document.getElementById('front-flashlight')
+    flash.classList.toggle("flash-active");
+    //if the canvas has the class active
+    if (flash.classList.contains("flash-active")) {
+        //add a class of active to the canvas
+        flash.classList.add("flash-active");
+        setTimeout(function () {
+            flash.classList.remove("flash-active");
+        }, 2000);
+    }
+
 }
 function saveSnapshot() {
     //get the canvas data as a data url
@@ -74,7 +88,7 @@ function saveSnapshot() {
     document.body.removeChild(link);
 }
 
-function deleteSnapshot(){
+function deleteSnapshot() {
     //clear the canvas image
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 }
@@ -85,7 +99,7 @@ function pauseVideo() {
     video.pause();
 }
 
-function startVideo(){
+function startVideo() {
     //create a function to start the video
     video.play()
 }
