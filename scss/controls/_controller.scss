@@ -34,4 +34,10 @@
         filter: brightness(1.1);
         cursor: pointer;
     }
+    @media (max-width:800px){
+        position:absolute;
+        z-index:1;
+        //position it on the bottom
+        bottom:0;
+    }
 }
