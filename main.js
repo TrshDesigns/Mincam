@@ -29,7 +29,7 @@ function snapshot() {
     canvas.classList.add("animated", "fadeIn");
     //wait for the animation to finish and then remove the class
     setTimeout(function () {
-        canvas.classList.remove("animated", "animate__flash");
+        canvas.classList.remove("animated", "fadeIn");
     }, 1000);
     }, 1000); 
     let currentCanvas = document.createElement("canvas");
