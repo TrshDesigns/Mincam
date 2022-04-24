@@ -47,9 +47,9 @@
     height: 130px;
     outline:none;
     background-color:rgb(3, 3, 3);
-    border:3.5px solid white; 
+    border-top:4px solid white; 
     top:36px;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
 
     @media (max-width:800px){
         z-index:1;

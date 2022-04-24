@@ -66,18 +66,13 @@ function resizeCanvas() {
     }
 }
 
-var flashActive = true;
+let flashActive = false;
 function frontFlash() {
-    let flashIcon = document.getElementsByClassName("fas fa-bolt");
-
-    if (flashActive = false) {
-        flashActive = true;
-        flashIcon.style.display = "block";
-        flashIcon.style.border = "1px solid orange"
-        flashIcon.appendChild(activeIndicator);
-    } else {
-        flashActive = false;
-    }
+    //create a function to activate the front flash
+    flashActive = true;
+}
+function noFlash(){
+    flashActive = false;
 }
 function activateFrontFlash() {
     let flash = document.getElementById('front-flashlight')
