@@ -1,9 +1,8 @@
 #controls {
     button {
-        background-color:rgb(255, 255, 255);
-        color: #0f0f0f;
+        color: #ffffff;
         border-radius: 5px;
-        padding:5px;
+        background-color:rgb(3,3,3);
         margin-inline:5px;
         border:none;
         display:flex;
@@ -24,20 +23,28 @@
             font-size:17px;
         }
     }
+    #snap-button{
+        width:40px;
+        height: 40px;
+        border-radius:100px;
+        border:3px solid rgb(109, 109, 109);
+        background-color:#0f0f0f;
+    }
 
     display: flex;
     justify-content: space-around;
-    height: 40px;
+    align-items:center;
+    height: 80px;
     outline:none;
+    background-color:rgb(3, 3, 3);
+    border-radius: 10px 10px 0px 0px;
 
     button:hover {
         filter: brightness(1.1);
         cursor: pointer;
     }
     @media (max-width:800px){
-        position:absolute;
         z-index:1;
         //position it on the bottom
-        bottom:0;
     }
 }

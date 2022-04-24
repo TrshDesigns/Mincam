@@ -21,27 +21,36 @@
     <script src="/main.js"></script>
   </head>
   <body>
-      <main>
+    <main>
       <div id="app">
         <!--create a camera-->
         <div class="camera">
-          <video id="video" autoplay></video>
-        <canvas id="canvas"></canvas>
-        <div id="controls">
-          <button onclick="startVideo()"><i class="fas fa-play"></i>Play</button>
-          <button onclick="pauseVideo()"><i class="fas fa-pause"></i>Pause</button>
-          <!--add a delete button-->
-          <button onclick="deleteSnapshot()"><i class="fas fa-trash-alt"></i>Delete</button>
-          <!--add a snap bottom-->
-          <button onclick="snapshot()"><i class="fas fa-camera"></i>Snap</button>
-          <!--add a save button-->
-          <button onclick="saveSnapshot()"><i class="fas fa-save"></i>Save</button>
+          <div id="video-container">
+            <video id="video" autoplay></video>
+            <div id="controls">
+              <button onclick="startVideo()">
+                <i class="fas fa-play"></i>Play
+              </button>
+              <button onclick="pauseVideo()">
+                <i class="fas fa-pause"></i>Pause
+              </button>
+              <!--add a snap bottom-->
+              <button id="snap-button" onclick="snapshot()"></button>
+              <!--add a delete button-->
+              <button onclick="deleteSnapshot()">
+                <i class="fas fa-trash-alt"></i>Delete
+              </button>
+              <!--add a save button-->
+              <button onclick="saveSnapshot()">
+                <i class="fas fa-save"></i>Save
+              </button>
+            </div>
+          </div>
+          <canvas id="canvas"></canvas>
         </div>
-        </div>
-          <script>
-             //get the user camera data stream and assing it to the video
-             
-          </script>
+        <script>
+          //get the user camera data stream and assing it to the video
+        </script>
       </div>
       <div id="gallery-bar">
         <div id="gallery-container"></div>
