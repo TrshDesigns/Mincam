@@ -24,14 +24,12 @@ function snapshot() {
     canvas.style.objectFit = 'contain';
     //draw the video to the canvas
     context.drawImage(video, 0, 0, videoWidth, videoHeight);
-    setTimeout(function () {
     //add a animate.css animation to the canvas 
     canvas.classList.add("animated", "fadeIn");
     //wait for the animation to finish and then remove the class
     setTimeout(function () {
         canvas.classList.remove("animated", "fadeIn");
-    }, 1000);
-    }, 1000); 
+    }, 1200);
     let currentCanvas = document.createElement("canvas");
     currentCanvasContext = currentCanvas.getContext("2d");
     currentCanvasContext.drawImage(canvas, 0, 0, videoWidth, videoHeight);
@@ -42,6 +40,23 @@ function snapshot() {
     galleryBarContainer.appendChild(imageContainer);
 }
 
+function resizeCanvas(){
+    //this function activates when canvas button is clicked
+    //add a class of active to the canvas when clicked
+    //and remove it when clicked again
+    canvas.classList.toggle("active");
+    //if the canvas has the class active
+    if (canvas.classList.contains("active")) {
+        //add a class of active to the canvas
+        canvas.classList.add("active");
+        canvas.style.objectFit = 'contain';
+        context.drawImage(video, 0, 0, videoWidth, videoHeight);
+    }
+    else {
+        //remove the class of active from the canvas
+        canvas.classList.remove("active");
+    }
+}
 function saveSnapshot() {
     //get the canvas data as a data url
     var dataURL = canvas.toDataURL(Date.now() + ".png");

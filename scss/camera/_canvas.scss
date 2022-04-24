@@ -4,12 +4,25 @@
     margin: 20px 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
+    transition: all 0.3s ease-in-out;
     @media (max-width: 800px) {
         position: absolute;
         bottom: 100px;
-        left:20px;
-        height:60px;
-        width:62px;
+        left: 20px;
+        height: 60px;
+        width: 62px;
         border: 3.5px solid white;
     }
+}
+.active {
+    //center the canvas and make it bigger
+    transform: scale(5);
+    //center the element using left and bottom
+    //the element needs to be in the exact center of the page
+    //so we need to subtract half of the width and height
+    //of the element
+    left: 43.5vw !important;
+    bottom:50vh !important;
+    border: 1px solid white !important;
+    margin:0 !important;
 }
