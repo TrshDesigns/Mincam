@@ -24,6 +24,14 @@ function snapshot() {
     canvas.style.objectFit = 'contain';
     //draw the video to the canvas
     context.drawImage(video, 0, 0, videoWidth, videoHeight);
+    setTimeout(function () {
+    //add a animate.css animation to the canvas 
+    canvas.classList.add("animated", "fadeIn");
+    //wait for the animation to finish and then remove the class
+    setTimeout(function () {
+        canvas.classList.remove("animated", "animate__flash");
+    }, 1000);
+    }, 1000); 
     let currentCanvas = document.createElement("canvas");
     currentCanvasContext = currentCanvas.getContext("2d");
     currentCanvasContext.drawImage(canvas, 0, 0, videoWidth, videoHeight);
