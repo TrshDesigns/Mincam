@@ -21,17 +21,15 @@
             transform: scale(1.1);
         }
         .fas{
-            font-size:19px;
+            font-size:17px;
         }
-        font-weight: 900;
     }
-    display: grid;
-    gap:10px;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+
+    display: flex;
+    justify-content: space-around;
     height: 40px;
     outline:none;
-    margin-top:80px;
+    margin-top:30px;
 
     button:hover {
         filter: brightness(1.1);
