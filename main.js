@@ -155,6 +155,7 @@ function switchCamera() {
         navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
             //set the video source to the new video source
             video.srcObject = stream;
+            video.play();
         });
     });
 }
