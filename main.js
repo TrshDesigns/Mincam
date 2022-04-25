@@ -111,27 +111,54 @@ function saveSnapshot() {
     document.body.removeChild(link);
 }
 
-function setCamera() {
-    //create a function to change the user camera between front and back camera on mobile devices
-    //if the user has a front and back camera
-    if (navigator.mediaDevices.enumerateDevices().then(function (devices) {
+function switchCamera() {
+    //create a function to switch between cameras in mobile devices
+    //get the different cameras on the device using user gete media stream with devices
+    navigator.mediaDevices.enumerateDevices().then(function (devices) {
+        //create a variable to store the cameras
+        let cameras = [];
+        //loop through the devices
         devices.forEach(function (device) {
-            if (device.kind === 'videoinput') {
-                //if the device is a front camera
-                if (device.label.includes('front')) {
-                    //set the video source to the front camera
-                    video.srcObject = navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
-                }
-                //if the device is a back camera
-                else if (device.label.includes('back')) {
-                    //set the video source to the back camera
-                    video.srcObject = navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-                }
+            //if the device kind is videoinput
+            if (device.kind === "videoinput") {
+                //push the device to the cameras array
+                cameras.push(device);
             }
         });
-    }
-    ));
+        //create a variable to store the current video source
+        let currentVideoSource = video.srcObject;
+        //create a variable to store the current video source id
+        let currentVideoSourceId = currentVideoSource.getTracks()[0].id;
+        //create a variable to store the new video source
+        let newVideoSource;
+        //loop through the cameras
+        for (let i = 0; i < cameras.length; i++) {
+            //if the current video source id is equal to the cameras id
+            if (currentVideoSourceId === cameras[i].id) {
+                //if the cameras id is equal to the last cameras id
+                if (i === cameras.length - 1) {
+                    //set the new video source to the first cameras id
+                    newVideoSource = cameras[0].id;
+                } else {
+                    //set the new video source to the next cameras id
+                    newVideoSource = cameras[i + 1].id;
+                }
+            }
+        }
+        //create a variable to store the constraints
+        let constraints = {
+            video: {
+                deviceId: { exact: newVideoSource }
+            }
+        };
+        //get the new video source using the constraints
+        navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
+            //set the video source to the new video source
+            video.srcObject = stream;
+        });
+    });
 }
+
 
 
 function deleteSnapshot() {
