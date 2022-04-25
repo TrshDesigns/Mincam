@@ -154,6 +154,9 @@ function switchCamera() {
         //get the new video source using the constraints
         navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
             //set the video source to the new video source
+            video.getTracks().forEach(function (track) {
+                track.stop();
+            });
             video.srcObject = stream;
             video.play();
         });
