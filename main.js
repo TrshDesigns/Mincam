@@ -20,17 +20,22 @@ function snapshot() {
     //set a canvas height and width to the video height and width without ruining the aspect ratio 
     canvas.width = videoWidth;
     canvas.height = videoHeight;
+    canvas.style.objectFit = 'none';
     //draw the video to the canvas
-    canvas.style.objectFit = 'contain';
     //draw the video to the canvas
     //if flash active is true then activate the flash
     if (flashActive == true) {
         activateFrontFlash();
         setTimeout(function () {
-        context.drawImage(video, 0, 0, videoWidth, videoHeight);
+
+            canvas.style.objectFit = 'contain';
+            context.drawImage(video, 0, 0, videoWidth, videoHeight);
+            //invert the canvas hroziontally using tranlsateX -1
+            context.translate(videoWidth, 0);
         }, 800);
         //if flash active is false then deactivate the flash
     } else if (flashActive == false) {
+        canvas.style.objectFit = 'contain';
         context.drawImage(video, 0, 0, videoWidth, videoHeight);
         flashAcive = true;
     }
@@ -55,7 +60,7 @@ function resizeCanvas() {
     //and remove it when clicked again
     canvas.classList.toggle("active");
     //if the canvas has the class active
-    if (canvas.classList.contains("active")) {
+    if (canvas.classList.contains("active") && canvas.style.objectFit == 'contain') {
         //add a class of active to the canvas
         canvas.classList.add("active");
         canvas.style.objectFit = 'contain';
@@ -66,12 +71,11 @@ function resizeCanvas() {
     }
 }
 
-let flashActive = false;
 function frontFlash() {
     //create a function to activate the front flash
     flashActive = true;
 }
-function noFlash(){
+function noFlash() {
     flashActive = false;
 }
 function activateFrontFlash() {
@@ -114,59 +118,14 @@ function saveSnapshot() {
 function switchCamera() {
     //create a function to switch between cameras in mobile devices
     //get the different cameras on the device using user gete media stream with devices
-    navigator.mediaDevices.enumerateDevices().then(function (devices) {
-        //create a variable to store the cameras
-        let cameras = [];
-        //loop through the devices
-        devices.forEach(function (device) {
-            //if the device kind is videoinput
-            if (device.kind === "videoinput") {
-                //push the device to the cameras array
-                cameras.push(device);
-            }
-        });
-        //create a variable to store the current video source
-        let currentVideoSource = video.srcObject;
-        //create a variable to store the current video source id
-        let currentVideoSourceId = currentVideoSource.getTracks()[0].id;
-        //create a variable to store the new video source
-        let newVideoSource;
-        //loop through the cameras
-        for (let i = 0; i < cameras.length; i++) {
-            //if the current video source id is equal to the cameras id
-            if (currentVideoSourceId === cameras[i].id) {
-                //if the cameras id is equal to the last cameras id
-                if (i === cameras.length - 1) {
-                    //set the new video source to the first cameras id
-                    newVideoSource = cameras[0].id;
-                } else {
-                    //set the new video source to the next cameras id
-                    newVideoSource = cameras[i + 1].id;
-                }
-            }
-        }
-        //create a variable to store the constraints
-        let constraints = {
-            video: {
-                deviceId: { exact: newVideoSource }
-            }
-        };
-        //get the new video source using the constraints
-        navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
-            //set the video source to the new video source
-            //stop the cuurrent video and track
-            currentVideoSource.getTracks()[0].stop();
-            video.srcObject = stream;
-            video.play();
-        });
-    });
-}
 
+}
 
 
 function deleteSnapshot() {
     //clear the canvas image
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+    canvas.style.objectFit = 'none';
 }
 
 
