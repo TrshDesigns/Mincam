@@ -5,7 +5,7 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         video.play();
     })
     .catch(function (err) {
-        alert("An error occurred: " + err);
+        console.log("An error occurred: " + err);
     });
 //create a function called snapshot that takes the video and output it to the canvas as a snapshot
 function snapshot() {
@@ -28,6 +28,7 @@ function snapshot() {
     if (flashActive == true) {
         activateFrontFlash();
         setTimeout(function () {
+
             canvas.style.objectFit = 'contain';
             context.drawImage(video, 0, 0, videoWidth, videoHeight);
         }, 800);
@@ -113,6 +114,8 @@ function saveSnapshot() {
     document.body.removeChild(link);
 }
 
+//create a function to start recording video from the video element
+
 function switchCamera() {
     //create a function to switch between cameras in mobile devices
     //get the different cameras on the device using user gete media stream with devices
@@ -124,7 +127,7 @@ function deleteSnapshot() {
     //clear the canvas image
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
     canvas.style.objectFit = 'none';
-    if (canvas.classList.contains("active")){
+    if (canvas.classList.contains("active")) {
         resizeCanvas()
     }
 }
