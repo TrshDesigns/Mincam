@@ -5,4 +5,7 @@ main{
     justify-content: space-around;
     align-items:center;
     background-color: var(--main-color);
+    @media (max-width){
+        flex-direction: column!important;
+    }
 }

@@ -5,7 +5,7 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         video.play();
     })
     .catch(function (err) {
-        console.log("An error occurred: " + err);
+        alert("An error occurred: " + err);
     });
 //create a function called snapshot that takes the video and output it to the canvas as a snapshot
 function snapshot() {
@@ -28,11 +28,8 @@ function snapshot() {
     if (flashActive == true) {
         activateFrontFlash();
         setTimeout(function () {
-
             canvas.style.objectFit = 'contain';
             context.drawImage(video, 0, 0, videoWidth, videoHeight);
-            //invert the canvas hroziontally using tranlsateX -1
-            context.translate(videoWidth, 0);
         }, 800);
         //if flash active is false then deactivate the flash
     } else if (flashActive == false) {
@@ -127,6 +124,9 @@ function deleteSnapshot() {
     //clear the canvas image
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
     canvas.style.objectFit = 'none';
+    if (canvas.classList.contains("active")){
+        resizeCanvas()
+    }
 }
 
 
