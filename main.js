@@ -105,7 +105,10 @@ function activateFrontFlash() {
     }
 }
 function saveSnapshot() {
-    //get the canvas data as a data url
+    if (canvas.style.objectFit != 'contain'){
+        alert("take a picture first!")
+    } else {
+         //get the canvas data as a data url
     var dataURL = canvas.toDataURL(Date.now() + ".png");
     //create a link to the data url
     var link = document.createElement("a");
@@ -119,6 +122,7 @@ function saveSnapshot() {
     link.click();
     //remove the link from the document
     document.body.removeChild(link);
+    }  
 }
 
 //create a function to start recording video from the video element
