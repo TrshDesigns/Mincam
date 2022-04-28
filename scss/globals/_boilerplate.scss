@@ -1,7 +1,7 @@
 html {
     box-sizing: border-box;
     font-size: 100%;
-    overflow-y:hidden;
+    overflow-y: hidden;
 }
 *,
 *::before,
@@ -16,11 +16,13 @@ body {
     line-height: 1.5;
     color: #333;
 }
-a, a:visited {
+a,
+a:visited {
     text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.fas{
-    margin-inline:5px;
-    color:white;
-    font-size: 21px !important;;
+.fas {
+    margin-inline: 5px;
+    color: white;
+    font-size: 21px !important;
 }
