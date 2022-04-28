@@ -1,11 +1,18 @@
+#reziser {
+    @media (min-width: 800px) {
+        width: fit-content;
+        height: fit-content;
+        border: none;
+        display: contents;
+    }
+}
 #canvas {
     width: 220px;
     height: 180px;
-    margin: 20px 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
-    transform: scale(1.0);
+    transform: scale(1);
     @media (max-width: 800px) {
         position: absolute;
         bottom: 100px;
@@ -13,6 +20,7 @@
         height: 60px;
         width: 62px;
         border: 3.5px solid white;
+        margin: 20px 10px;
     }
 }
 .active {
@@ -23,8 +31,8 @@
     //so we need to subtract half of the width and height
     //of the element
     left: 43.5vw !important;
-    bottom:50vh !important;
+    bottom: 50vh !important;
     border: 1px solid white !important;
-    margin:0 !important;
-    border-radius:3px !important;
+    margin: 0 !important;
+    border-radius: 3px !important;
 }
