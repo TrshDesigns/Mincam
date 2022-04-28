@@ -69,13 +69,20 @@ function resizeCanvas() {
         canvas.classList.remove("active");
     }
 }
-
 function frontFlash() {
     //create a function to activate the front flash
+    let noFlashIndicator = document.getElementById("no-flash-indicator");
+    let frontFlashIndicator = document.getElementById("front-flash-indicator");
     flashActive = true;
+    frontFlashIndicator.className = "active-indicator"
+    noFlashIndicator.className = ""
 }
 function noFlash() {
+    let noFlashIndicator = document.getElementById("no-flash-indicator");
+    let frontFlashIndicator = document.getElementById("front-flash-indicator");
     flashActive = false;
+    noFlashIndicator.className = "active-indicator";
+    frontFlashIndicator.className = "";
 }
 function activateFrontFlash() {
     let flash = document.getElementById('front-flashlight')
