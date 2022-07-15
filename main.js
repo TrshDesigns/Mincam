@@ -15,9 +15,14 @@ function snapshot() {
     var context = canvas.getContext("2d");
     let removeImage = document.createElement("i");
     let saveImage = document.createElement("i");
+    let editImage = document.createElement("i");
     let imageContainer = document.createElement("div")
+    let galeryOptionsContainer = document.createElement('div');
+    let galleryBar = document.getElementById("gallery-bar");
+    galeryOptionsContainer.className = 'galery-options-container'
     removeImage.className = "fas fa-trash-alt";
     saveImage.className = "fas fa-save";
+    editImage.className = "fas fa-edit"
     //set a canvas height and width to the video height and width without ruining the aspect ratio 
     canvas.width = videoWidth;
     canvas.height = videoHeight;
@@ -28,7 +33,6 @@ function snapshot() {
     if (flashActive == true) {
         activateFrontFlash();
         setTimeout(function () {
-
             canvas.style.objectFit = 'contain';
             context.drawImage(video, 0, 0, videoWidth, videoHeight);
         }, 800);
@@ -47,11 +51,16 @@ function snapshot() {
     let currentCanvas = document.createElement("canvas");
     currentCanvasContext = currentCanvas.getContext("2d");
     currentCanvasContext.drawImage(canvas, 0, 0, videoWidth, videoHeight);
+    currentCanvas.className = "savedCanvas";
     imageContainer.className = "photo";
-    imageContainer.appendChild(removeImage);
-    imageContainer.appendChild(saveImage);
+    galeryOptionsContainer.appendChild(removeImage);
+    galeryOptionsContainer.appendChild(saveImage);
+    galeryOptionsContainer.appendChild(editImage);
     imageContainer.appendChild(currentCanvas);
+    imageContainer.appendChild(galeryOptionsContainer);
     galleryBarContainer.appendChild(imageContainer);
+    galleryBar.scrollTop = galleryBar.scrollHeight; 
+    galleryBar.scrollRight = galleryBar.scrollWidth;
 }
 function resizeCanvas() {
     //this function activates when canvas button is clicked

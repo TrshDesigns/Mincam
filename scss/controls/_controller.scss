@@ -14,7 +14,7 @@
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
         align-items: center;
         //add a 3d keyboard effect to the button
-        transform: perspective(1px) translateZ(0);
+        transform: perspective(2px) translateZ(0);
         transition-duration: 0.3s;
         transition-property: transform;
         transition-timing-function: ease-out;
@@ -48,11 +48,13 @@
     outline:none;
     background-color:rgb(3, 3, 3);
     border-top:4px solid white; 
-    top:36px;
+    top:18px;
     border-radius: 5px 5px 0px 0px;
 
     @media (max-width:800px){
         z-index:1;
         //position it on the bottom
+        top: 30px !important;
+        height:18vh;
     }
 }
