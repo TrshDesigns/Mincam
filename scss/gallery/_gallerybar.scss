@@ -3,10 +3,10 @@
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    padding: 10px;
     /*add a soft border*/
     height: 70vh;
     background-color: var(--main-color);
-    padding: 10px;
     //change the scrollbar
     &::-webkit-scrollbar {
         width: 10px;
@@ -25,8 +25,8 @@
         border: 1.5px solid white;
         transition: all ease-in-out 1s;
         min-height: 20%;
-        &:hover {
-           height: 30%;
+        @media(max-width: 800px) {
+            display: none;
         }
     }
     #gallery-container {
@@ -46,12 +46,13 @@
         flex-direction: row;
         display: flex;
         align-items: center;
-        height: 6vh;
+        height: 10vh;
         width: 100%;
         overflow-x: scroll !important;
         overflow-y: hidden !important;
         position: absolute;
-        top: 80.5vh;
-        padding: 10px;
+        top: 76vh;
+        padding: 0 40px 0 40px;
+        border-radius: 10px 10px 0 0;
     }
 }
