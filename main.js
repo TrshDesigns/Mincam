@@ -10,8 +10,6 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
 
 
 let controls = document.getElementById("controls");
-
-//on window load run the switch camera function
 //create a function called snapshot that takes the video and output it to the canvas as a snapshot
 function snapshot() {
     let videoWidth = document.getElementById("video").videoWidth;
@@ -169,22 +167,26 @@ function switchCamera() {
     }
 
     ).then(function () {
-        //add the camera selector to header
-        //add an event listener to the camera selector
-        cameraSelector.addEventListener("change", function () {
-            //if the camera selector has a value
-            if (cameraSelector.value) {
-                //set the video source to the device id
-                video.srcObject = navigator.mediaDevices.getUserMedia({
-                    video: {
-                        deviceId: cameraSelector.value
-                    }
-                });
-                video.play();
+        //get the selected camera
+        const camera = cameraSelector.value;
+        //get the video element
+        const video = document.getElementById("video");
+        //get the video stream from the selected camera
+        navigator.mediaDevices.getUserMedia({
+            video: {
+                //set the video source to the selected camera
+                deviceId: camera
             }
+        }).then(function (stream) {
+            //set the video source to the stream
+            video.srcObject = stream;
+            //play the video
+            video.play();
+        }).catch(function (err) {
+            //if there is an error
+            console.log(err);
         });
-    }  //end of the then function
-    ); //end of the mediaDevices.enumerateDevices function
+    });
 }
 
 function deleteSnapshot() {
