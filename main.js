@@ -1,13 +1,14 @@
 let flashActive = false;
-navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+window.onload = function () {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(function (stream) {
         video.srcObject = stream;
         video.play();
     })
     .catch(function (err) {
-        console.log("An error occurred: " + err);
+        alert("An error occurred: " + err);
     });
-
+}
 
 let controls = document.getElementById("controls");
 //create a function called snapshot that takes the video and output it to the canvas as a snapshot
@@ -141,19 +142,15 @@ function saveSnapshot() {
 
 function switchCamera() {
     //create a function to switch between cameras in mobile devices
-    //get the different cameras on the device using user gete media stream with devices
-    //create a input element for the user to select the camera 
     const cameraSelector = document.getElementById("camera-selector");
     cameraSelector.className = "camera-selector";
-    //create a option element for the user to select the camera
-    let option = document.createElement("option");
     //add the option to the camera selector
     //get the different cameras on the device using user gete media stream with devices
     navigator.mediaDevices.enumerateDevices().then(function (devices) {
         //loop through the different cameras on the device
         devices.forEach(function (device) {
             //if the device is a video input
-            if (device.kind === "videoinput") {
+            if (device.kind === "videoinput" && device.label != "") {
                 //create a option element for the user to select the camera
                 let option = document.createElement("option");
                 //set the option value to the device id
@@ -179,9 +176,8 @@ function switchCamera() {
                         video.play();
                     })
                     .catch(function (err) {
-                        console.log("An error occurred: " + err);
+                        alert("An error occurred: " + err);
                     });
-
             }
         });
     }  //end of the then function

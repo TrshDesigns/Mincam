@@ -32,3 +32,22 @@ a:visited {
         margin: auto;
     }
 }
+select {
+    background-color: #212121;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 10px;
+    max-width: 130px;
+    margin:4px;
+    padding: 10px;
+}
+
+option {
+    background-color: #212121;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 10px;
+    max-width: 100%;
+}
