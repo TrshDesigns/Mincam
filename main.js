@@ -7,6 +7,10 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .catch(function (err) {
         console.log("An error occurred: " + err);
     });
+
+
+let controls = document.getElementById("controls");
+const header = document.getElementsByTagName("header");
 //create a function called snapshot that takes the video and output it to the canvas as a snapshot
 function snapshot() {
     let videoWidth = document.getElementById("video").videoWidth;
@@ -59,7 +63,7 @@ function snapshot() {
     imageContainer.appendChild(currentCanvas);
     imageContainer.appendChild(galeryOptionsContainer);
     galleryBarContainer.appendChild(imageContainer);
-    galleryBar.scrollTop = galleryBar.scrollHeight; 
+    galleryBar.scrollTop = galleryBar.scrollHeight;
     galleryBar.scrollRight = galleryBar.scrollWidth;
 }
 function resizeCanvas() {
@@ -114,24 +118,24 @@ function activateFrontFlash() {
     }
 }
 function saveSnapshot() {
-    if (canvas.style.objectFit != 'contain'){
+    if (canvas.style.objectFit != 'contain') {
         alert("take a picture first!")
     } else {
-         //get the canvas data as a data url
-    var dataURL = canvas.toDataURL(Date.now() + ".png");
-    //create a link to the data url
-    var link = document.createElement("a");
-    //set the link href to the data url
-    link.href = dataURL;
-    //set the link download attribute to the current date and time
-    link.download = new Date().toISOString();
-    //add the link to the document
-    document.body.appendChild(link);
-    //click the link to trigger the download
-    link.click();
-    //remove the link from the document
-    document.body.removeChild(link);
-    }  
+        //get the canvas data as a data url
+        var dataURL = canvas.toDataURL(Date.now() + ".png");
+        //create a link to the data url
+        var link = document.createElement("a");
+        //set the link href to the data url
+        link.href = dataURL;
+        //set the link download attribute to the current date and time
+        link.download = new Date().toISOString();
+        //add the link to the document
+        document.body.appendChild(link);
+        //click the link to trigger the download
+        link.click();
+        //remove the link from the document
+        document.body.removeChild(link);
+    }
 }
 
 //create a function to start recording video from the video element
@@ -139,7 +143,48 @@ function saveSnapshot() {
 function switchCamera() {
     //create a function to switch between cameras in mobile devices
     //get the different cameras on the device using user gete media stream with devices
-
+    //create a input element for the user to select the camera 
+    let cameraSelector = document.createElement("select");
+    cameraSelector.className = "camera-selector";
+    //create a option element for the user to select the camera
+    let option = document.createElement("option");
+    option.value = "";
+    option.text = "Select Camera";
+    //add the option to the camera selector
+    cameraSelector.appendChild(option);
+    //get the different cameras on the device using user gete media stream with devices
+    navigator.mediaDevices.enumerateDevices().then(function (devices) {
+        //loop through the different cameras on the device
+        devices.forEach(function (device) {
+            //if the device is a video input
+            if (device.kind === "videoinput") {
+                //create a option element for the user to select the camera
+                let option = document.createElement("option");
+                //set the option value to the device id
+                option.value = device.deviceId;
+                //set the option text to the device label
+                option.text = device.label;
+                //add the option to the camera selector
+                cameraSelector.appendChild(option);
+            }
+        });
+    }
+    ).then(function () {
+        //add the camera selector to the video element
+        video.parentNode.insertBefore(cameraSelector, video);
+        //add an event listener to the camera selector
+        cameraSelector.addEventListener("change", function () {
+            //if the camera selector has a value
+            if (cameraSelector.value) {
+                //set the video source to the device id
+                video.srcObject = navigator.mediaDevices.getUserMedia({
+                    video: { deviceId: cameraSelector.value }
+                });
+            }
+        });
+    }  //end of the then function
+    ); //end of the mediaDevices.enumerateDevices function
+    header.appendChild(cameraSelector);
 }
 
 

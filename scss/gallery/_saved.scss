@@ -1,5 +1,7 @@
 .savedCanvas {
     width: 150px;
     height: 100px;
+    //make the image fit completely
+    background-size: cover;
     border-radius: 5px 5px 10px 10px;
 }

@@ -5,6 +5,11 @@
         border: none;
         display: contents;
     }
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-items: center;
 }
 
 #canvas {
@@ -27,14 +32,20 @@
 }
 .active {
     //center the canvas and make it bigger
-    transform: scale(5) !important;
+    transform: scale(2.4) !important;
+    left: 34.5vw !important;
     //center the element using left and bottom
     //the element needs to be in the exact center of the page
     //so we need to subtract half of the width and height
     //of the element
-    left: 43.5vw !important;
-    bottom: 50vh !important;
-    border: 1px solid white !important;
+    bottom: 40vh !important;
+    border: 1.9px solid white !important;
     margin: 0 !important;
     border-radius: 3px !important;
+    position: absolute !important;
+    @media (max-width: 800px) {
+    transform: scale(5.5) !important;
+    left: 43.5vw !important;
+    bottom: 50vh !important;
+    }
 }
