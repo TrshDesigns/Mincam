@@ -10,7 +10,8 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
 
 
 let controls = document.getElementById("controls");
-const header = document.getElementsByTagName("header");
+
+//on window load run the switch camera function
 //create a function called snapshot that takes the video and output it to the canvas as a snapshot
 function snapshot() {
     let videoWidth = document.getElementById("video").videoWidth;
@@ -144,14 +145,11 @@ function switchCamera() {
     //create a function to switch between cameras in mobile devices
     //get the different cameras on the device using user gete media stream with devices
     //create a input element for the user to select the camera 
-    let cameraSelector = document.createElement("select");
+    const cameraSelector = document.getElementById("camera-selector");
     cameraSelector.className = "camera-selector";
     //create a option element for the user to select the camera
     let option = document.createElement("option");
-    option.value = "";
-    option.text = "Select Camera";
     //add the option to the camera selector
-    cameraSelector.appendChild(option);
     //get the different cameras on the device using user gete media stream with devices
     navigator.mediaDevices.enumerateDevices().then(function (devices) {
         //loop through the different cameras on the device
@@ -169,24 +167,25 @@ function switchCamera() {
             }
         });
     }
+
     ).then(function () {
-        //add the camera selector to the video element
-        video.parentNode.insertBefore(cameraSelector, video);
+        //add the camera selector to header
         //add an event listener to the camera selector
         cameraSelector.addEventListener("change", function () {
             //if the camera selector has a value
             if (cameraSelector.value) {
                 //set the video source to the device id
                 video.srcObject = navigator.mediaDevices.getUserMedia({
-                    video: { deviceId: cameraSelector.value }
+                    video: {
+                        deviceId: cameraSelector.value
+                    }
                 });
+                video.play();
             }
         });
     }  //end of the then function
     ); //end of the mediaDevices.enumerateDevices function
-    header.appendChild(cameraSelector);
 }
-
 
 function deleteSnapshot() {
     //clear the canvas image
