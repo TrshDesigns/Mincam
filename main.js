@@ -167,26 +167,25 @@ function switchCamera() {
     }
 
     ).then(function () {
-        //get the selected camera
-        const camera = cameraSelector.value;
-        //get the video element
-        const video = document.getElementById("video");
-        //get the video stream from the selected camera
-        navigator.mediaDevices.getUserMedia({
-            video: {
-                //set the video source to the selected camera
-                deviceId: camera
+        //add the camera selector to header
+        //add an event listener to the camera selector
+        cameraSelector.addEventListener("change", function () {
+            //if the camera selector has a value
+            if (cameraSelector.value) {
+                //set the video source to the device id
+                navigator.mediaDevices.getUserMedia({ video: true, deviceId: cameraSelector.value, audio: false })
+                    .then(function (stream) {
+                        video.srcObject = stream;
+                        video.play();
+                    })
+                    .catch(function (err) {
+                        console.log("An error occurred: " + err);
+                    });
+
             }
-        }).then(function (stream) {
-            //set the video source to the stream
-            video.srcObject = stream;
-            //play the video
-            video.play();
-        }).catch(function (err) {
-            //if there is an error
-            console.log(err);
         });
-    });
+    }  //end of the then function
+    ); //end of the mediaDevices.enumerateDevices function
 }
 
 function deleteSnapshot() {
