@@ -29,28 +29,28 @@
   </head>
   <body>
     <div id="front-flashlight"></div>
-    <header>
-      <button class="activate-flash" onclick="frontFlash()">
-        <!--add a fontawesome lightning icon-->
-        <i class="fas fa-bolt"
-          ><div id="front-flash-indicator" class=""></div
-        ></i>
-      </button>
-      <button onclick="noFlash()">
-        <!--add a fontawesome striked bolt-->
-        <i style="text-decoration: line-through" class="fas fa-bolt"
-          ><div id="no-flash-indicator" class="active-indicator"></div
-        ></i>
-      </button>
-      <button onclick="switchCamera()">
-        <!--ad a turn arrow icon-->
-        <i class="fas fa-sync-alt"></i>
-      </button>
-      <select id="camera-selector">
-        <option>Select Camera</option>
-      </select>
-    </header>
     <main>
+      <header>
+        <button class="activate-flash" onclick="frontFlash()">
+          <!--add a fontawesome lightning icon-->
+          <i class="fas fa-bolt"
+            ><div id="front-flash-indicator" class=""></div
+          ></i>
+        </button>
+        <button onclick="noFlash()">
+          <!--add a fontawesome striked bolt-->
+          <i style="text-decoration: line-through" class="fas fa-bolt"
+            ><div id="no-flash-indicator" class="active-indicator"></div
+          ></i>
+        </button>
+        <button onclick="switchCamera()">
+          <!--ad a turn arrow icon-->
+          <i class="fas fa-sync-alt"></i>
+        </button>
+        <select id="camera-selector">
+          <option>Select Camera</option>
+        </select>
+      </header>
       <div id="app">
         <!--create a camera-->
         <div class="camera">
@@ -76,12 +76,9 @@
             </div>
           </div>
           <button id="reziser" onclick="resizeCanvas()">
-              <canvas id="canvas"></canvas>
+            <canvas id="canvas"></canvas>
           </button>
         </div>
-        <script>
-          //get the user camera data stream and assing it to the video
-        </script>
       </div>
       <div id="gallery-bar">
         <div id="gallery-container"></div>

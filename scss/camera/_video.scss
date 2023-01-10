@@ -3,12 +3,13 @@
     //add a soft neuromprhic shadow
     box-shadow: 0 0 10px rgba(0,0,0,0.10);
     border-radius:12px;
+    margin-top: 50px;
     @media (max-width:800px){
         width:100vw;
         height:100vh;
         z-index:0;
     }
     //invert horizontally the direction of the video
-    transform:scaleX(-1);
+    transform:scaleX(1);
     object-fit:cover;
 }
