@@ -17,6 +17,7 @@
     height: 180px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
+    z-index: 2;
     border:3.5px solid white;
     transition: all 0.3s ease-in-out;
     transform: scale(1);
@@ -24,8 +25,8 @@
         position: absolute;
         bottom: 177px;
         left: 20px;
-        height: 60px;
-        width: 62px;
+        height: 11vh;
+        width: 12.5vw;
         border: 3.5px solid white;
         margin: 20px 10px;
     }
