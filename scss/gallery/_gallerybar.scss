@@ -24,7 +24,20 @@
         border-radius: 10px;
         border: 1.5px solid white;
         transition: all ease-in-out 1s;
-        min-height: 20%;
+        min-height: 10%;
+    }
+    @media (max-width: 800px) {
+        flex-direction: row;
+        display: flex;
+        align-items: center;
+        height: 65px;
+        width: 80vw;
+        overflow-x: scroll !important;
+        overflow-y: hidden !important;
+        position: absolute;
+        top: 75vh;
+        padding: 0 10px 0 10px;
+        border-radius: 10px 10px 0 0;
     }
     #gallery-container {
         display: flex;
@@ -42,22 +55,16 @@
                 background: #ffffff !important;
                 border-radius: 10px;
             }
+            &::-webkit-scrollbar {
+                height: 3px;
+                border-radius: 4px;
+            }
             &::-webkit-scrollbar-thumb {
-                color: black !important;
+                height:1px;
+                background-color: #010101;
+                border-radius: 10px;
+                width: 10%;
             }
         }
-    }
-    @media (max-width: 800px) {
-        flex-direction: row;
-        display: flex;
-        align-items: center;
-        height: 65px;
-        width: 80vw;
-        overflow-x: scroll !important;
-        overflow-y: hidden !important;
-        position: absolute;
-        top: 76vh;
-        padding: 0 10px 0 10px;
-        border-radius: 10px 10px 0 0;
     }
 }

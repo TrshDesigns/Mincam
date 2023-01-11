@@ -1,13 +1,15 @@
 let flashActive = false;
+let swithchValue = 0;
+let cameras = [];
 window.onload = function () {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-    .then(function (stream) {
-        video.srcObject = stream;
-        video.play();
-    })
-    .catch(function (err) {
-        alert("An error occurred: " + err);
-    });
+        .then(function (stream) {
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(function (err) {
+            alert("An error occurred: " + err);
+        });
 }
 
 let controls = document.getElementById("controls");
@@ -141,45 +143,40 @@ function saveSnapshot() {
 //create a function to start recording video from the video element
 
 function switchCamera() {
+    if (swithchValue = 0) {
+        swithchValue = 1;
+    } else {
+        swithchValue = 0;
+    }
     //create a function to switch between cameras in mobile devices
-    const cameraSelector = document.getElementById("camera-selector");
-    cameraSelector.className = "camera-selector";
-    //add the option to the camera selector
     //get the different cameras on the device using user gete media stream with devices
     navigator.mediaDevices.enumerateDevices().then(function (devices) {
         //loop through the different cameras on the device
         devices.forEach(function (device) {
             //if the device is a video input
-            if (device.kind === "videoinput" && device.label != "") {
-                //create a option element for the user to select the camera
-                let option = document.createElement("option");
-                //set the option value to the device id
-                option.value = device.deviceId;
-                //set the option text to the device label
-                option.text = device.label;
-                //add the option to the camera selector
-                cameraSelector.appendChild(option);
+            if (device.kind === "videoinput" && device.label != "" && cameras != undefined) {
+                if (cameras.includes(device.deviceId)) {
+                    alert("executing this function will result in pushing the same camera two times to the array of cameras used to switch between the cameras")
+                } else {
+                    cameras.push(device.deviceId);
+                    console.log(cameras);
+                }
             }
         });
     }
-
     ).then(function () {
-        //add the camera selector to header
-        //add an event listener to the camera selector
-        cameraSelector.addEventListener("change", function () {
-            //if the camera selector has a value
-            if (cameraSelector.value) {
-                //set the video source to the device id
-                navigator.mediaDevices.getUserMedia({ video: true, deviceId: cameraSelector.value, audio: false })
-                    .then(function (stream) {
-                        video.srcObject = stream;
-                        video.play();
-                    })
-                    .catch(function (err) {
-                        alert("An error occurred: " + err);
-                    });
-            }
-        });
+        if (cameras.values > 1) {
+            navigator.mediaDevices.getUserMedia({ video: true, deviceId: cameras[swithchValue].value, audio: false })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function (err) {
+                    alert("An error occurred: " + err);
+                });
+        } else {
+            alert("you have only one camera available")
+        }
     }  //end of the then function
     ); //end of the mediaDevices.enumerateDevices function
 }
@@ -193,7 +190,6 @@ function deleteSnapshot() {
     }
 }
 
-
 //create a function that pause the video
 function pauseVideo() {
     video.pause();
@@ -203,3 +199,5 @@ function startVideo() {
     //create a function to start the video
     video.play()
 }
+
+switchCamera()
