@@ -162,7 +162,9 @@ function switchCamera() {
     var devices = navigator.mediaDevices.enumerateDevices();
 
     devices.then(function (deviceInfos) {
-        var currentFacing = video.getAttribute('data-facing-mode');
+        if (video) {
+            var currentFacing = video.getAttribute('data-facing-mode');
+        }
         var currentDeviceId = video.getAttribute('data-device-id');
         var newDeviceId = currentDeviceId;
         var newFacing;
