@@ -1,5 +1,5 @@
 let flashActive = false;
-let swithchValue = 0;
+let switchValue = 0;
 let cameras = [];
 window.onload = function () {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
@@ -121,7 +121,7 @@ function activateFrontFlash() {
 }
 function saveSnapshot() {
     if (canvas.style.objectFit != 'contain') {
-        alert("take a picture first!")
+        alertSystem(takePictureFirst)
     } else {
         //get the canvas data as a data url
         var dataURL = canvas.toDataURL(Date.now() + ".png");
@@ -140,13 +140,30 @@ function saveSnapshot() {
     }
 }
 
-//create a function to start recording video from the video element
+takePictureFirst = document.createElement("div");
+takePictureFirst.className = "alert";
+takePictureFirst.innerHTML = 'HELLO';
+function alertSystem(alert) {
+    let alertHolder = document.getElementById("alert-holder");
+    alertHolder.appendChild(alert);
+    setTimeout(function () {
+        alertHolder.style.display = 'flex'
+        setTimeout(function () {
+            alertHolder.classList.remove("animated", "fadeIn");
 
+            alertHolder.style.display = "none"
+        }, 400);
+        alertHolder.classList.add("animated", "fadeOut");
+    }, 800);
+
+}
+
+//create a function to start recording video from the video element
 function switchCamera() {
-    if (swithchValue = 0) {
-        swithchValue = 1;
+    if (switchValue == 0) {
+        switchValue = 1;
     } else {
-        swithchValue = 0;
+        switchValue = 0;
     }
     //create a function to switch between cameras in mobile devices
     //get the different cameras on the device using user gete media stream with devices
@@ -156,17 +173,17 @@ function switchCamera() {
             //if the device is a video input
             if (device.kind === "videoinput" && device.label != "" && cameras != undefined) {
                 if (cameras.includes(device.deviceId)) {
-                    alert("executing this function will result in pushing the same camera two times to the array of cameras used to switch between the cameras")
+                    console.log("")
                 } else {
                     cameras.push(device.deviceId);
                     console.log(cameras);
                 }
             }
         });
-    }
-    ).then(function () {
-        if (cameras.values > 1) {
-            navigator.mediaDevices.getUserMedia({ video: true, deviceId: cameras[swithchValue].value, audio: false })
+    })
+    .then(function () {
+        if (cameras.length > 1) {
+            navigator.mediaDevices.getUserMedia({ video: true, deviceId: cameras[switchValue], audio: false })
                 .then(function (stream) {
                     video.srcObject = stream;
                     video.play();
@@ -175,11 +192,11 @@ function switchCamera() {
                     alert("An error occurred: " + err);
                 });
         } else {
-            alert("you have only one camera available")
+            console.log("you have only one camera available")
         }
-    }  //end of the then function
-    ); //end of the mediaDevices.enumerateDevices function
+    }); //end of the mediaDevices.enumerateDevices function
 }
+
 
 function deleteSnapshot() {
     //clear the canvas image
@@ -199,5 +216,3 @@ function startVideo() {
     //create a function to start the video
     video.play()
 }
-
-switchCamera()
