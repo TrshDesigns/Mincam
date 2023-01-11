@@ -157,7 +157,7 @@ function alertSystem(alert) {
 }
 
 function switchCamera() {
-    var video = document.getElementById('video  ');
+    var video = document.getElementById('video');
     var constraints = { video: { facingMode: 'environment' } };
     var devices = navigator.mediaDevices.enumerateDevices();
 
