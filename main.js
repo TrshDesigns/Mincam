@@ -156,45 +156,41 @@ function alertSystem(alert) {
 
 }
 
-//create a function to start recording video from the video element
-let switchValue = 0;
-let cameras = [];
 function switchCamera() {
-    if (switchValue == 0) {
-        switchValue = 1;
-    } else {
-        switchValue = 0;
-    }
-    //create a function to switch between cameras in mobile devices
-    //get the different cameras on the device using user getUserMedia stream with devices
-    navigator.mediaDevices.enumerateDevices().then(function (devices) {
-        //loop through the different cameras on the device
-        devices.forEach(function (device) {
-            //if the device is a video input
-            if (device.kind === "videoinput" && device.label != "" && cameras.length != 0) {
-                if (cameras.includes(device.deviceId)) {
-                    console.log("")
-                } else {
-                    cameras.push(device.deviceId);
-                    console.log(cameras);
-                }
+    var video = document.getElementById('video  ');
+    var constraints = { video: { facingMode: 'environment' } };
+    var devices = navigator.mediaDevices.enumerateDevices();
+
+    devices.then(function (deviceInfos) {
+        var currentFacing = video.getAttribute('data-facing-mode');
+        var currentDeviceId = video.getAttribute('data-device-id');
+        var newDeviceId = currentDeviceId;
+        var newFacing;
+
+        deviceInfos.forEach(function (deviceInfo) {
+            if (deviceInfo.kind === 'videoinput' &&
+                deviceInfo.deviceId === currentDeviceId) {
+                newFacing = (currentFacing === 'environment') ?
+                    'user' : 'environment';
+                newDeviceId = deviceInfo.deviceId;
             }
         });
-    }).then(function () {
-        if (cameras.length > 1) {
-            navigator.mediaDevices.getUserMedia({ video: true, deviceId: cameras[switchValue], audio: false })
+
+        if (newFacing) {
+            constraints = { video: { deviceId: { exact: newDeviceId }, facingMode: newFacing } };
+            navigator.mediaDevices.getUserMedia(constraints)
                 .then(function (stream) {
                     video.srcObject = stream;
-                    video.play();
+                    video.setAttribute('data-device-id', newDeviceId);
+                    video.setAttribute('data-facing-mode', newFacing);
                 })
-                .catch(function (err) {
-                    alert("An error occurred: " + err);
+                .catch(function (error) {
+                    console.log(error);
                 });
-        } else {
-            console.log("you have only one camera available")
         }
-    }); //end of the mediaDevices.enumerateDevices function
+    });
 }
+
 
 
 
