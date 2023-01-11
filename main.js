@@ -1,6 +1,4 @@
-let flashActive = false;
-let switchValue = 0;
-let cameras = [];
+let flashActive = false;t
 window.onload = function () {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         .then(function (stream) {
@@ -159,6 +157,8 @@ function alertSystem(alert) {
 }
 
 //create a function to start recording video from the video element
+let switchValue = 0;
+let cameras = [];
 function switchCamera() {
     if (switchValue == 0) {
         switchValue = 1;
@@ -166,12 +166,12 @@ function switchCamera() {
         switchValue = 0;
     }
     //create a function to switch between cameras in mobile devices
-    //get the different cameras on the device using user gete media stream with devices
+    //get the different cameras on the device using user getUserMedia stream with devices
     navigator.mediaDevices.enumerateDevices().then(function (devices) {
         //loop through the different cameras on the device
         devices.forEach(function (device) {
             //if the device is a video input
-            if (device.kind === "videoinput" && device.label != "" && cameras != undefined) {
+            if (device.kind === "videoinput" && device.label != "" && cameras.length != 0) {
                 if (cameras.includes(device.deviceId)) {
                     console.log("")
                 } else {
@@ -180,8 +180,7 @@ function switchCamera() {
                 }
             }
         });
-    })
-    .then(function () {
+    }).then(function () {
         if (cameras.length > 1) {
             navigator.mediaDevices.getUserMedia({ video: true, deviceId: cameras[switchValue], audio: false })
                 .then(function (stream) {
@@ -196,6 +195,7 @@ function switchCamera() {
         }
     }); //end of the mediaDevices.enumerateDevices function
 }
+
 
 
 function deleteSnapshot() {
