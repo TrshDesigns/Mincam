@@ -1,4 +1,4 @@
-let flashActive = false;t
+let flashActive = false;
 window.onload = function () {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         .then(function (stream) {
